@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
-use App\User;
 use App\Models\Item;
 use App\Models\ItemDetail;
+use App\Http\Requests\StoreItem;
 
 class ItemController extends Controller
 {
@@ -37,7 +37,7 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreItem $request)
     {
         $item = new Item;
         $item_detail = new ItemDetail;
