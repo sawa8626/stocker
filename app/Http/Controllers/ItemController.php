@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Auth;
+use App\User;
+use App\Models\Item;
+use App\Models\ItemDetail;
 
 class ItemController extends Controller
 {
@@ -34,7 +39,22 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item;
+        $item_detail = new ItemDetail;
+
+        $item->name = $request->input('name');
+        $item->genre = $request->input('genre');
+        $item->user_id = Auth::id();
+        $item->save();
+
+        $saved_item = DB::table('items')->where('name', $request->input('name'))->first();
+
+        $item_detail->price = $request->input('price');
+        $item_detail->start_day = $request->input('start_day');
+        $item_detail->item_id = $saved_item->id;
+        $item_detail->save();
+
+        return redirect('/');
     }
 
     /**

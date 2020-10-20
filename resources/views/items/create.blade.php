@@ -25,30 +25,30 @@
                     </div>
                 @endif
 
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('items.store') }}">
                 @csrf
                     <div class="form-group row">
                         <label for="inputName" class="col-sm-3 col-form-label">アイテム名</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputName" placeholder="アイテム名">
+                        <input type="text" class="form-control" name="name" id="inputName" placeholder="アイテム名">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputGenre" class="col-sm-3 col-form-label">ジャンル</label>
                         <div class="col-sm-9">
-                        <input type="text" class="form-control" id="inputGenre" placeholder="ジャンル">
+                        <input type="text" class="form-control" name="genre" id="inputGenre" placeholder="ジャンル">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputPrice" class="col-sm-3 col-form-label">価格(¥)</label>
                         <div class="col-sm-9">
-                        <input type="number" class="form-control" id="inputPrice" placeholder="価格">
+                        <input type="number" class="form-control" name="price" id="inputPrice" placeholder="価格">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="inputDate" class="col-sm-3 col-form-label">使用開始日</label>
                         <div class="col-sm-9">
-                        <input type="date" class="form-control" id="inputDate">
+                        <input type="date" class="form-control" name="start_day" id="inputDate">
                         </div>
                     </div>
                     <div class="form-group row">
