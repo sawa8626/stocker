@@ -18,7 +18,9 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::with('details')->where('user_id', Auth::id())->get();
+
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -44,13 +46,12 @@ class ItemController extends Controller
 
         $item->name = $request->input('name');
         $item->genre = $request->input('genre');
+        $item->price = $request->input('price');
         $item->user_id = Auth::id();
         $item->save();
 
         $saved_item = DB::table('items')->where('name', $request->input('name'))->first();
 
-        $item_detail->price = $request->input('price');
-        $item_detail->start_day = $request->input('start_day');
         $item_detail->item_id = $saved_item->id;
         $item_detail->save();
 

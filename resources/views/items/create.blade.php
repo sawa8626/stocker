@@ -46,12 +46,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="inputDate" class="col-sm-3 col-form-label">使用開始日</label>
-                        <div class="col-sm-9">
-                        <input type="date" class="form-control" name="start_day" id="inputDate">
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary">登録する</button>
                         </div>
