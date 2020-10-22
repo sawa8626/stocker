@@ -16,10 +16,16 @@
                     <li class="list-group-item">平均使用日数：日</li>
                 </ul>
                 <div class="card-body">
-                    <a class="btn btn-outline-primary" href="{{ $item->id }}/start" role="button">使用開始</a>
-                    <a class="btn btn-outline-dark" href="#" role="button">使い切り</a>
+                    @if($item->stock_number !== 0)
+                        <a class="btn btn-outline-primary" href="{{ $item->id }}/start" role="button">使用開始</a>
+                    @endif
+                    @if($item->using_number !== 0)
+                        <a class="btn btn-outline-dark" href="#" role="button">使い切り</a>
+                    @endif
                     <a class="btn btn-outline-success" href="#" role="button">在庫追加</a>
-                    <a class="btn btn-outline-secondary" href="#" role="button">交換</a>
+                    @if($item->using_number !== 0 && $item->stock_number !== 0)
+                        <a class="btn btn-outline-secondary" href="#" role="button">交換</a>
+                    @endif
                 </div>
             </div>
         </div>
