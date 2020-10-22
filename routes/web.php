@@ -21,6 +21,7 @@ Route::group(['prefix' => 'items', 'middleware' => 'auth'], function(){
     Route::get('index', 'ItemController@index')->name('items.index');
     Route::get('create', 'ItemController@create')->name('items.create');
     Route::post('store', 'ItemController@store')->name('items.store');
+    Route::get('{item_id}/start', 'ItemController@start')->name('items.start');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

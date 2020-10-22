@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Item;
 use App\Models\ItemDetail;
 use App\Http\Requests\StoreItem;
+use Carbon\Carbon;
 
 class ItemController extends Controller
 {
@@ -19,6 +20,17 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::with('details')->where('user_id', Auth::id())->get();
+
+        foreach($items as $item)
+        {
+            $using_item = ItemDetail::where('item_id', $item->id)
+            ->whereNull('end_day')->whereNotNull('start_day')->get();
+            $item->using_number = $using_item->count();
+
+            $stock_item = ItemDetail::where('item_id', $item->id)
+            ->whereNull('start_day')->get();
+            $item->stock_number = $stock_item->count();
+        };
 
         return view('items.index', compact('items'));
     }
@@ -57,6 +69,24 @@ class ItemController extends Controller
 
         return redirect('items/index');
     }
+
+    public function start($item_id)
+    {
+        $item_detail = ItemDetail::where('item_id', $item_id)->where('start_day', null)->first();
+        $item_detail->start_day = Carbon::today();
+        $item_detail->using = true;
+        $item_detail->save();
+
+        return redirect('items/index');
+    }
+
+
+
+
+
+
+
+
 
     /**
      * Display the specified resource.
