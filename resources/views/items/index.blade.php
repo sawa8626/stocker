@@ -17,6 +17,7 @@
                 </ul>
                 <div class="card-body">
                     <a class="btn btn-outline-primary" href="#" role="button">使用開始</a>
+                    <a class="btn btn-outline-dark" href="#" role="button">使い切り</a>
                     <a class="btn btn-outline-success" href="#" role="button">在庫追加</a>
                     <a class="btn btn-outline-secondary" href="#" role="button">交換</a>
                 </div>
