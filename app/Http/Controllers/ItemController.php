@@ -55,7 +55,7 @@ class ItemController extends Controller
         $item_detail->item_id = $saved_item->id;
         $item_detail->save();
 
-        return redirect('/');
+        return redirect('items/index');
     }
 
     /**

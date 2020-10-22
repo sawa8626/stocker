@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'items', 'middleware' => 'auth'], function(){
+    Route::get('index', 'ItemController@index')->name('items.index');
     Route::get('create', 'ItemController@create')->name('items.create');
     Route::post('store', 'ItemController@store')->name('items.store');
 });
