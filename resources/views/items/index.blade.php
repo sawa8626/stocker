@@ -13,14 +13,14 @@
                     <li class="list-group-item">価格：{{ $item->price }}円</li>
                     <li class="list-group-item">使用中：{{ $item->using_number }}個</li>
                     <li class="list-group-item">在庫（未使用）：{{ $item->stock_number }}個</li>
-                    <li class="list-group-item">平均使用日数：日</li>
+                    <li class="list-group-item">平均使用日数：{{ $item->use_term_avg }}日</li>
                 </ul>
                 <div class="card-body">
                     @if($item->stock_number !== 0)
                         <a class="btn btn-outline-primary" href="{{ $item->id }}/start" role="button">使用開始</a>
                     @endif
                     @if($item->using_number !== 0)
-                        <a class="btn btn-outline-dark" href="#" role="button">使い切り</a>
+                        <a class="btn btn-outline-dark" href="{{ $item->id }}/end" role="button">使い切り</a>
                     @endif
                     <a class="btn btn-outline-success" href="#" role="button">在庫追加</a>
                     @if($item->using_number !== 0 && $item->stock_number !== 0)

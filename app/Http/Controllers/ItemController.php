@@ -30,6 +30,28 @@ class ItemController extends Controller
             $stock_item = ItemDetail::where('item_id', $item->id)
             ->whereNull('start_day')->get();
             $item->stock_number = $stock_item->count();
+
+            $items_by_use_term = ItemDetail::where('item_id', $item->id)
+            ->whereNotNull('use_term')->get();
+            // dd($items_by_use_term);
+            
+
+            if($items_by_use_term->isEmpty())
+            {
+                $item->use_term_avg = '0';
+            }
+            if(!$items_by_use_term->isEmpty())
+            {
+                $use_terms = [];
+
+                foreach($items_by_use_term as $item_by_use_term)
+                {
+                    $use_terms[] = $item_by_use_term->use_term;
+                }
+
+                $number_of_use_term = count($use_terms);
+                $item->use_term_avg = array_sum($use_terms) / $number_of_use_term;
+            }
         };
 
         return view('items.index', compact('items'));
@@ -75,6 +97,18 @@ class ItemController extends Controller
         $item_detail = ItemDetail::where('item_id', $item_id)->where('start_day', null)->first();
         $item_detail->start_day = Carbon::today();
         $item_detail->using = true;
+        $item_detail->save();
+
+        return redirect('items/index');
+    }
+
+    public function end($item_id)
+    {
+        $item_detail = ItemDetail::where('item_id', $item_id)->where('using', true)->first();
+        $item_detail->end_day = Carbon::today();
+        $start_day = new Carbon($item_detail->start_day); // Carbonインスタンスに変換
+        $item_detail->use_term = $start_day->diffInDays($item_detail->end_day);
+        $item_detail->using = false;
         $item_detail->save();
 
         return redirect('items/index');
