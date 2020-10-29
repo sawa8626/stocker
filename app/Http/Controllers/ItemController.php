@@ -94,7 +94,7 @@ class ItemController extends Controller
 
     public function start($item_id)
     {
-        $item_detail = ItemDetail::where('item_id', $item_id)->where('start_day', null)->first();
+        $item_detail = ItemDetail::where('item_id', $item_id)->whereNull('start_day')->first();
         $item_detail->start_day = Carbon::today();
         $item_detail->using = true;
         $item_detail->save();
@@ -119,6 +119,23 @@ class ItemController extends Controller
         $item_detail = new ItemDetail;
         $item_detail->item_id = $item_id;
         $item_detail->save();
+
+        return redirect('items/index');
+    }
+
+    public function exchange($item_id)
+    {
+        $item_detail_end = ItemDetail::where('item_id', $item_id)->where('using', true)->first();
+        $item_detail_end->end_day = Carbon::today();
+        $start_day = new Carbon($item_detail_end->start_day); // Carbonインスタンスに変換
+        $item_detail_end->use_term = $start_day->diffInDays($item_detail_end->end_day);
+        $item_detail_end->using = false;
+        $item_detail_end->save();
+
+        $item_detail_start = ItemDetail::where('item_id', $item_id)->whereNull('start_day')->first();
+        $item_detail_start->start_day = Carbon::today();
+        $item_detail_start->using = true;
+        $item_detail_start->save();
 
         return redirect('items/index');
     }

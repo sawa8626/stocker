@@ -20,11 +20,11 @@
                         <a class="btn btn-outline-primary" href="{{ $item->id }}/start" role="button">使用開始</a>
                     @endif
                     @if($item->using_number !== 0)
-                        <a class="btn btn-outline-dark" href="{{ $item->id }}/end" role="button">使い切り</a>
+                        <a class="btn btn-outline-dark" href="{{ $item->id }}/end" role="button">使切り</a>
                     @endif
                     <a class="btn btn-outline-success" href="{{ $item->id }}/add" role="button">在庫追加</a>
                     @if($item->using_number !== 0 && $item->stock_number !== 0)
-                        <a class="btn btn-outline-secondary" href="#" role="button">交換</a>
+                        <a class="btn btn-outline-secondary" href="{{ $item->id }}/exchange" role="button">交換</a>
                     @endif
                 </div>
             </div>
