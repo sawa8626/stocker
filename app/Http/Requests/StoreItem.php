@@ -26,7 +26,6 @@ class StoreItem extends FormRequest
         return [
             'name' => 'required',
             'genre' => 'required',
-            'start_day' => 'required',
             'price' => 'numeric|min:1',
         ];
     }
