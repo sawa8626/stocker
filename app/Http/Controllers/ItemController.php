@@ -114,6 +114,14 @@ class ItemController extends Controller
         return redirect('items/index');
     }
 
+    public function add($item_id)
+    {
+        $item_detail = new ItemDetail;
+        $item_detail->item_id = $item_id;
+        $item_detail->save();
+
+        return redirect('items/index');
+    }
 
 
 
