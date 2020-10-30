@@ -62,6 +62,25 @@ class ItemController extends Controller
                 $number_of_use_term = count($use_terms);
                 $item->use_term_avg = array_sum($use_terms) / $number_of_use_term;
             }
+
+            // 推定残量の算出
+            $using_item = ItemDetail::where('item_id', $item->id)
+            ->whereNull('end_day')->whereNotNull('start_day')->first();
+            if(isset($using_item))
+            {
+                $start_day = $using_item->start_day;
+                $start_day_carbon = new Carbon($start_day);
+                $elapsed_days = $start_day_carbon->diffInDays(Carbon::today());
+                $difference = $item->use_term_avg - $elapsed_days;
+                if($difference !== 0)
+                {
+                    $item->remaining_amount = round((($difference) / $item->use_term_avg) * 100);
+                }
+                if($difference === 0)
+                {
+                    $item->remaining_amount = null;
+                }
+            };
         };
 
         return view('items.index', compact('items', 'genre_for_nav'));
@@ -188,6 +207,25 @@ class ItemController extends Controller
                 $number_of_use_term = count($use_terms);
                 $item->use_term_avg = array_sum($use_terms) / $number_of_use_term;
             }
+
+            // 推定残量の算出
+            $using_item = ItemDetail::where('item_id', $item->id)
+            ->whereNull('end_day')->whereNotNull('start_day')->first();
+            if(isset($using_item))
+            {
+                $start_day = $using_item->start_day;
+                $start_day_carbon = new Carbon($start_day);
+                $elapsed_days = $start_day_carbon->diffInDays(Carbon::today());
+                $difference = $item->use_term_avg - $elapsed_days;
+                if($difference !== 0)
+                {
+                    $item->remaining_amount = round((($difference) / $item->use_term_avg) * 100);
+                }
+                if($difference === 0)
+                {
+                    $item->remaining_amount = null;
+                }
+            };
         };
 
         $items_for_genre = Item::with('details')->where('user_id', Auth::id())->get();

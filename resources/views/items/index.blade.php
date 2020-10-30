@@ -14,6 +14,17 @@
                     <li class="list-group-item">使用中：{{ $item->using_number }}個</li>
                     <li class="list-group-item">在庫（未使用）：{{ $item->stock_number }}個</li>
                     <li class="list-group-item">平均使用日数：{{ $item->use_term_avg }}日</li>
+                    <li class="list-group-item">推定残量：
+                        @if(!isset($item->remaining_amount))
+                            初使用のため算出不可
+                        @elseif($item->remaining_amount < 0)
+                            平均使用日数を超過
+                        @else
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ $item->remaining_amount }}%;" aria-valuenow="{{ $item->remaining_amount }}" aria-valuemin="0" aria-valuemax="100">{{ $item->remaining_amount }}%</div>
+                        </div>
+                        @endif
+                    </li>
                 </ul>
                 <div class="card-body">
                     @if($item->stock_number !== 0)
