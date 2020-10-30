@@ -60,11 +60,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    <a class="dropdown-item" href="{{ route('items.create') }}">
-                                        {{ __('新規アイテム登録') }}
-                                    </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -75,6 +70,8 @@
                 </div>
             </div>
         </nav>
+
+        @include('layouts.nav-content')
 
         <main class="py-4">
             @yield('content')
