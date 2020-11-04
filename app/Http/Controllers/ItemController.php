@@ -48,7 +48,7 @@ class ItemController extends Controller
 
             if($items_by_use_term->isEmpty())
             {
-                $item->use_term_avg = '0';
+                $item->use_term_avg = 0;
             }
             if(!$items_by_use_term->isEmpty())
             {
@@ -72,9 +72,9 @@ class ItemController extends Controller
                 $start_day_carbon = new Carbon($start_day);
                 $elapsed_days = $start_day_carbon->diffInDays(Carbon::today());
                 $difference = $item->use_term_avg - $elapsed_days;
-                if($difference !== 0)
+                if($difference !== 0 && $item->use_term_avg !== 0)
                 {
-                    $item->remaining_amount = round((($difference) / $item->use_term_avg) * 100);
+                    $item->remaining_amount = round(($difference / $item->use_term_avg) * 100);
                 }
                 if($difference === 0)
                 {
@@ -193,7 +193,7 @@ class ItemController extends Controller
 
             if($items_by_use_term->isEmpty())
             {
-                $item->use_term_avg = '0';
+                $item->use_term_avg = 0;
             }
             if(!$items_by_use_term->isEmpty())
             {
@@ -217,9 +217,9 @@ class ItemController extends Controller
                 $start_day_carbon = new Carbon($start_day);
                 $elapsed_days = $start_day_carbon->diffInDays(Carbon::today());
                 $difference = $item->use_term_avg - $elapsed_days;
-                if($difference !== 0)
+                if($difference !== 0 && $item->use_term_avg !== 0)
                 {
-                    $item->remaining_amount = round((($difference) / $item->use_term_avg) * 100);
+                    $item->remaining_amount = round(($difference / $item->use_term_avg) * 100);
                 }
                 if($difference === 0)
                 {
