@@ -175,6 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\CreateItemServiceProvider::class,
+        App\Providers\EditItemDetailServiceProvider::class,
 
     ],
 
@@ -227,6 +228,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'CreateItemService' => App\Facades\CreateItemService::class,
+        'EditItemDetailService' => App\Facades\EditItemDetailService::class,
 
     ],
 
