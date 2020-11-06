@@ -9,6 +9,7 @@ use App\Models\Item;
 use App\Models\ItemDetail;
 use App\Http\Requests\StoreItem;
 use Carbon\Carbon;
+use CreateItemService;
 
 class ItemController extends Controller
 {
@@ -107,16 +108,8 @@ class ItemController extends Controller
         $item = new Item;
         $item_detail = new ItemDetail;
 
-        $item->name = $request->input('name');
-        $item->genre = $request->input('genre');
-        $item->price = $request->input('price');
-        $item->user_id = Auth::id();
-        $item->save();
-
-        $saved_item = DB::table('items')->where('name', $request->input('name'))->first();
-
-        $item_detail->item_id = $saved_item->id;
-        $item_detail->save();
+        CreateItemService::storeItemObject($item, $request);
+        CreateItemService::storeItemDetailObject($item_detail, $request);
 
         return redirect('items/index');
     }
