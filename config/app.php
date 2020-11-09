@@ -174,6 +174,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\CreateItemServiceProvider::class,
+        App\Providers\EditItemDetailServiceProvider::class,
+        App\Providers\CreateInfoForIndexServiceProvider::class,
 
     ],
 
@@ -225,6 +228,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'CreateItemService' => App\Facades\CreateItemService::class,
+        'EditItemDetailService' => App\Facades\EditItemDetailService::class,
+        'CreateInfoForIndexService' => App\Facades\CreateInfoForIndexService::class,
 
     ],
 

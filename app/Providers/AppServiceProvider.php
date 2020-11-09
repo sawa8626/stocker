@@ -13,7 +13,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('App\Services\CreateItemService');
+        $this->app->bind('App\Services\EditItemDetailService');
+        $this->app->bind('App\Services\CreateInfoForIndexService');
     }
 
     /**
