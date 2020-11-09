@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind('App\Services\CreateItemService');
         $this->app->bind('App\Services\EditItemDetailService');
+        $this->app->bind('App\Services\CreateInfoForIndexService');
     }
 
     /**

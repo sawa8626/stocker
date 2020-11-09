@@ -11,6 +11,7 @@ use App\Http\Requests\StoreItem;
 use Carbon\Carbon;
 use App\Facades\CreateItemService;
 use App\Facades\EditItemDetailService;
+use App\Facades\CreateInfoForIndexService;
 
 class ItemController extends Controller
 {
@@ -24,12 +25,7 @@ class ItemController extends Controller
         $items = Item::with('details')->where('user_id', Auth::id())->get();
 
         // nav-bar用ジャンル配列の作成
-        $genre = [];
-        foreach($items as $item)
-        {
-            $genre[] = $item->genre;
-        };
-        $genre_for_nav = array_unique($genre);
+        $genre_for_nav = CreateInfoForIndexService::generateGenreArrayForNav($items);
 
         // indexページに表示する各item情報作成
         foreach($items as $item)
@@ -208,12 +204,7 @@ class ItemController extends Controller
         $items_for_genre = Item::with('details')->where('user_id', Auth::id())->get();
 
         // nav-bar用ジャンル配列の作成
-        $genre = [];
-        foreach($items_for_genre as $item)
-        {
-            $genre[] = $item->genre;
-        };
-        $genre_for_nav = array_unique($genre);
+        $genre_for_nav = CreateInfoForIndexService::generateGenreArrayForNav($items_for_genre);
 
         return view('items.index', compact('items', 'genre_for_nav'));
     }
