@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/', function () {
-    return view('items.index');
+    return redirect('/items/index');
 })->middleware('auth');
 
 Route::group(['prefix' => 'items', 'middleware' => 'auth'], function(){
