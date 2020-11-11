@@ -11,11 +11,11 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('items.index');
-});
-
-Auth::routes();
+})->middleware('auth');
 
 Route::group(['prefix' => 'items', 'middleware' => 'auth'], function(){
     Route::get('index', 'ItemController@index')->name('items.index');
